@@ -1,3 +1,4 @@
+
 #include <stdlib.h>
 
 #include "group.h"
@@ -12,9 +13,9 @@
 group_t *initialize_group() {
     group_t *group = calloc(1, sizeof(group_t));
 
-    group->x      = group->y     = 0;
-    group->height = xcb_screen->height_in_pixels;
-    group->width  = xcb_screen->width_in_pixels;
+    group->x = group->y = 0;
+    group->height   = xcb_screen->height_in_pixels;
+    group->width    = xcb_screen->width_in_pixels;
     group->children = construct_vector();
 
     push_to_vector(groups, group);
