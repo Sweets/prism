@@ -4,12 +4,10 @@
 
 #include "parsing.h"
 
-ipc_command_t ipc_get_command(char **args) {
-    char *command = args[0];
-
-    if (!strcmp(command, "-q"))
+ipc_command_t ipc_get_command(char *command) {
+    if (!strcmp(command, "quit"))
         return IPC_CMD_QUIT;
-    else if (!strcmp(command, "-T"))
+    else if (!strcmp(command, "tile_direction"))
         return IPC_CMD_SET_TILE_DIRECTION;
 
     return IPC_CMD_NULL;
