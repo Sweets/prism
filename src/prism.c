@@ -5,6 +5,7 @@
 
 #include "ipc/controller.h"
 #include "ipc/socket.h"
+#include "handlers/handlers.h"
 #include "util/logging.h"
 #include "wm/manager.h"
 #include "xcb/connection.h"

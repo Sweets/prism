@@ -16,6 +16,3 @@ extern vector_t *groups;
 
 unsigned int initialize_prism(void);
 void finalize_prism(void);
-void handle_xcb_events(void);
-void handle_ipc_input(void);
-void handle_signals(int);
