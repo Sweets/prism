@@ -26,7 +26,6 @@ char **ipc_split_input(char *buffer) {
         }
 
         argv[index] = token;
-        printf("%s\n", argv[index]);
         index++;
     }
 

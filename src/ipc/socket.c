@@ -64,7 +64,10 @@ char *read_from_socket(int file_descriptor) {
     char *buffer = calloc(256, sizeof(char));
     read(file_descriptor, buffer, 256);
 
-    return buffer;
+    if (strlen(buffer))
+        return buffer;
+
+    return NULL;
 }
 
 void finalize_socket() {
