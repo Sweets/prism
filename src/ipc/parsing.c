@@ -7,8 +7,14 @@
 ipc_command_t ipc_get_command(char *command) {
     if (!strcmp(command, "quit"))
         return IPC_CMD_QUIT;
-    else if (!strcmp(command, "tile_direction"))
+    else if (!strcmp(command, "tile"))
         return IPC_CMD_SET_TILE_DIRECTION;
+    else if (!strcmp(command, "reload"))
+        return IPC_CMD_RELOAD;
+    else if (!strcmp(command, "map"))
+        return IPC_CMD_MAP;
+    else if (!strcmp(command, "unmap"))
+        return IPC_CMD_UNMAP;
 
     return IPC_CMD_NULL;
 }
