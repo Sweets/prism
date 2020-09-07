@@ -32,7 +32,7 @@ void push_window_to_group(group_t *group, window_t *window) {
             window->x + group->x, window->y + group->y,
             window->height, window->width);
     } else {
-        split_current_view_port(group->children->size % 4, group, focused_window, window);
+        split_current_view_port(splitting_mode, group, focused_window, window);
     }
 
     push_to_vector(group->children, window);

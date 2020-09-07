@@ -5,6 +5,8 @@
 
 #include "../xcb/window.h"
 
+split_mode_t splitting_mode = SOUTHERN_SPLIT;
+
 void split_current_view_port(split_mode_t splitting_mode, group_t *group,
     window_t *originating_window, window_t *introducing_window) {
 
@@ -27,7 +29,7 @@ void split_current_view_port(split_mode_t splitting_mode, group_t *group,
             originating_window->height = introducing_window->height = height;
             introducing_window->width  = originating_window->width;
             break;
-        case EASTERN_SPLIT:
+        case WESTERN_SPLIT:
             introducing_window->x = originating_window->x;
             originating_window->x += width;
             introducing_window->y = originating_window->y;
@@ -35,7 +37,7 @@ void split_current_view_port(split_mode_t splitting_mode, group_t *group,
             introducing_window->height = originating_window->height;
             introducing_window->width  = originating_window->width = width;
             break;
-        case WESTERN_SPLIT:
+        case EASTERN_SPLIT:
             introducing_window->x = originating_window->x + width;
             introducing_window->y = originating_window->y;
 

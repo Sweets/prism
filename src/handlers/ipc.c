@@ -1,6 +1,7 @@
 #include "ipc.h"
 
 #include "../wm/manager.h"
+#include "../wm/tile.h"
 
 char *(*ipc_commands[IPC_CMD_NULL])(char**) = {
     [IPC_CMD_QUIT]               = handle_quit_command,
@@ -30,13 +31,13 @@ char *handle_tile_command(char **args) {
         return "tile_direction: No direction provided.";
 
     if (!strcmp(args[1], "up")) {
-        //
+        splitting_mode = NORTHERN_SPLIT;
     } else if (!strcmp(args[1], "down")) {
-        //
+        splitting_mode = SOUTHERN_SPLIT;
     } else if (!strcmp(args[1], "left")) {
-        //
+        splitting_mode = WESTERN_SPLIT;
     } else if (!strcmp(args[1], "right")) {
-        //
+        splitting_mode = EASTERN_SPLIT;
     } else {
         return "tile_direction: Invalid direction specified.";
     }

@@ -35,10 +35,9 @@ unsigned int initialize_prism() {
     focused_group = initialize_group(); // REMOVE
 
     unsigned int index = 0;
-    for (; index < SIGUNUSED; index++) {
+    for (; index < SIGUNUSED; index++)
         if (signals[index])
             signal(index, handle_signals);
-    }
 
     initialize_pointer();
     /* Attach to pointer, remove at some point */
