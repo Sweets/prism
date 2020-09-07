@@ -75,3 +75,15 @@ void resize_group(group_t *group, unsigned int height, unsigned int width) {
     group->height = height;
     group->width  = width;
 }
+
+void map_group(group_t *group) {
+    window_t *window = NULL;
+    while ((window = vector_iterator(group->children)))
+        map_window(window->id);
+}
+
+void unmap_group(group_t *group) {
+    window_t *window = NULL;
+    while ((window = vector_iterator(group->children)))
+        unmap_window(window->id);
+}

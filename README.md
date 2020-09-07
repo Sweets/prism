@@ -60,7 +60,7 @@ personal projects.
 
     - [ ] IPC
         - [x] Quit
-        - [ ] Specify tile direction
+        - [x] Specify tile direction
         - [ ] Map and unmap top-most focused group
         - [ ] Reload configuration
 
