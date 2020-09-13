@@ -35,19 +35,36 @@ unsigned int initialize_prism() {
     focused_group = initialize_group(); // REMOVE
 
     unsigned int index = 0;
-    for (; index < SIGUNUSED; index++)
+    for (; index < 4; index++)
+        initialize_group();
+
+    for (index = 0; index < SIGUNUSED; index++)
         if (signals[index])
             signal(index, handle_signals);
 
     initialize_pointer();
     /* Attach to pointer, remove at some point */
-    xcb_grab_button(xcb_connection, 0, xcb_screen->root, XCB_EVENT_MASK_BUTTON_PRESS |
-        XCB_EVENT_MASK_BUTTON_RELEASE, XCB_GRAB_MODE_ASYNC,
-        XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE, XCB_BUTTON_INDEX_1, XCB_MOD_MASK_ANY);
+    /*
+     * XCB_MOD_MASK_ANY     32768   Any
+     * XCB_MOD_MASK_5       128     ??
+     * XCB_MOD_MASK_4       64      ??
+     * XCB_MOD_MASK_3       32      ??
+     * XCB_MOD_MASK_2       16      ??
+     * XCB_MOD_MASK_1       8       ??
+     * XCB_MOD_MASK_CONTROL 4       Ctrl
+     * XCB_MOD_MASK_LOCK    2       ??
+     * XCB_MOD_MASK_SHIFT   1       Shift
+     */
 
-    xcb_grab_button(xcb_connection, 0, xcb_screen->root, XCB_EVENT_MASK_BUTTON_PRESS |
-            XCB_EVENT_MASK_BUTTON_RELEASE, XCB_GRAB_MODE_ASYNC,
-            XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE, XCB_BUTTON_INDEX_3, XCB_MOD_MASK_ANY);
+    xcb_grab_button(xcb_connection, 0, xcb_screen->root,
+        XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE,
+        XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE,
+        XCB_BUTTON_INDEX_1, XCB_MOD_MASK_SHIFT);
+
+    xcb_grab_button(xcb_connection, 0, xcb_screen->root,
+        XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE,
+        XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE,
+        XCB_BUTTON_INDEX_3, XCB_MOD_MASK_SHIFT);
 
     flush();
 
