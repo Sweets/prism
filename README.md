@@ -34,7 +34,7 @@ personal projects.
 - [ ] hell froze over
     - [ ] Groups
         - [ ] Sub groups
-        - [ ] Mapping and unmapping
+        - [x] Mapping and unmapping
         - [x] Move and resize
 
     - [ ] Floating
