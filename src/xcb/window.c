@@ -126,6 +126,20 @@ void change_window_geometry(xcb_window_t window_id, unsigned int x,
     configure_window(window_id, value_mask, values);
 }
 
+void window_grab_buttons(xcb_window_t window_id, unsigned char buttons,
+    unsigned int modifiers) {
+    xcb_grab_button(xcb_connection, 0, /*Do not pass pointer events*/
+        window_id,
+        XCB_EVENT_MASK_BUTTON_PRESS,
+        XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC,
+        XCB_NONE, XCB_NONE, buttons, modifiers);
+}
+
+void window_release_buttons(xcb_window_t window_id, unsigned char buttons,
+    unsigned int modifiers) {
+    xcb_ungrab_button(xcb_connection, buttons, window_id, modifiers);
+}
+
 void *get_window_property(xcb_window_t window_id, xcb_atom_t property,
     xcb_atom_t atom_type) {
     xcb_get_property_cookie_t atom_cookie;
