@@ -58,6 +58,7 @@ void unmanage_window(xcb_window_t window_id) {
             xcb_destroy_window(xcb_connection, window->parent);
 
             pull_from_vector(managed_windows, index);
+            reset_vector_iterator(managed_windows);
 
             free(window);
             return;
