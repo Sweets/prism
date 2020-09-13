@@ -38,6 +38,20 @@ void push_window_to_group(group_t *group, window_t *window) {
     push_to_vector(group->children, window);
 }
 
+void pull_window_from_group(group_t *group, window_t *window) {
+    window_t *window_element = NULL;
+
+    unsigned int index = 0;
+    for (; index < group->children->size; index++) {
+        window_element = get_from_vector(group->children, index);
+        if (window->id == window_element->id) {
+            pull_from_vector(group->children, index);
+            reset_vector_iterator(group->children);
+            return;
+        }
+    }
+}
+
 void move_group(group_t *group, unsigned int x, unsigned int y) {
     group->x = x;
     group->y = y;

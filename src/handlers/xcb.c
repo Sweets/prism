@@ -77,6 +77,10 @@ void handle_window_destruction(xcb_generic_event_t *generic_event) {
     if (!window)
         return;
 
+    if (focused_window->id == window->id)
+        focused_window = NULL;
+
+    pull_window_from_group(focused_group, window); // Determine which group it belongs to
     claim_freed_space(window, focused_group);
     unmanage_window(window_id);
     flush();
