@@ -30,7 +30,7 @@ char *handle_tile_command(char **args) {
     /* prism tile [up|down|left|right] */
 
     if (!args[1])
-        return "tile: No direction provided.";
+        return "tile: No direction specified.";
 
     if (!strcmp(args[1], "up"))
         splitting_mode = NORTHERN_SPLIT;
@@ -47,13 +47,19 @@ char *handle_tile_command(char **args) {
 }
 
 char *handle_map_command(char **args) {
-    (void)args;
+    if (!args[1])
+        return "map: No group specified.";
+
+    unsigned int nth_group = atoi(args[1]);
     // stub
     return NULL;
 }
 
 char *handle_unmap_command(char **args) {
-    (void)args;
+    if (!args[1])
+        return "unmap: No group specified.";
+
+    unsigned int nth_group = atoi(args[1]);
     // stub
     return NULL;
 }
