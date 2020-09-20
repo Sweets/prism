@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <string.h>
+
 #include "ipc.h"
 
 #include "../wm/manager.h"
