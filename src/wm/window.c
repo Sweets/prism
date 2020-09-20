@@ -35,7 +35,9 @@ window_t *manage_window(xcb_window_t window_id) {
         XCB_WINDOW_CLASS_INPUT_OUTPUT, screen_visual->visual_id,
         masked_values, values);
 
-    values[0] = XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY;
+    values[0] =
+        XCB_EVENT_MASK_BUTTON_PRESS |
+        XCB_EVENT_MASK_SUBSTRUCTURE_NOTIFY;
     xcb_change_window_attributes(xcb_connection, window->parent,
         XCB_CW_EVENT_MASK, values);
 

@@ -61,7 +61,19 @@ void handle_window_map_request(xcb_generic_event_t *generic_event) {
     push_window_to_group(focused_group, window);
     push_to_vector(managed_windows, window);
 
+    if (focused_window)
+        window_grab_buttons(focused_window->id,
+            XCB_BUTTON_INDEX_ANY ^ XCB_BUTTON_INDEX_4 ^ XCB_BUTTON_INDEX_5,
+            XCB_MOD_MASK_ANY);
+
+    map_window(window->id);
+    focus_window(window->id);
+    raise_window(window->id);
     focused_window = window;
+    
+    flush();
+    return;
+
 map:
     map_window(window_id);
     flush();
@@ -90,7 +102,35 @@ void handle_button_down(xcb_generic_event_t *generic_event) {
     xcb_button_press_event_t *event;
     event = (xcb_button_press_event_t*)generic_event;
 
-    log_debug("POINTER");
+    xcb_window_t window_id = event->event;
+    window_t *window = NULL;
+
+    while ((window = vector_iterator(managed_windows))) {
+        if (window->parent == window_id) {
+            window_id = window->id;
+            reset_vector_iterator(managed_windows);
+            break;
+        }
+    }
+
+    window = window_from_id(window_id);
+    if (!window)
+        return; // unmanaged window
+
+    if (focused_window)
+        window_grab_buttons(focused_window->id,
+            XCB_BUTTON_INDEX_ANY ^ XCB_BUTTON_INDEX_4 ^ XCB_BUTTON_INDEX_5,
+            XCB_MOD_MASK_ANY);
+
+    window_release_buttons(window->id,
+        XCB_BUTTON_INDEX_ANY, XCB_MOD_MASK_ANY);
+    raise_window(window->id);
+    focus_window(window->id);
+    focused_window = window;
+
+    flush();
+
+/*    log_debug("POINTER");
     xcb_grab_pointer(xcb_connection, XCB_NONE,
         xcb_screen->root,
         XCB_EVENT_MASK_BUTTON_RELEASE |
@@ -103,7 +143,7 @@ void handle_button_down(xcb_generic_event_t *generic_event) {
         XCB_CURRENT_TIME);
     flush();
 
-    store = get_pointer_coordinates();
+    store = get_pointer_coordinates();*/
 }
 
 void handle_button_up(xcb_generic_event_t *generic_event) {

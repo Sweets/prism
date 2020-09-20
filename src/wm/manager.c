@@ -56,15 +56,15 @@ unsigned int initialize_prism() {
      * XCB_MOD_MASK_SHIFT   1       Shift
      */
 
-    xcb_grab_button(xcb_connection, 0, xcb_screen->root,
+/*    xcb_grab_button(xcb_connection, 0, xcb_screen->root,
         XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE,
         XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE,
-        XCB_BUTTON_INDEX_1, XCB_MOD_MASK_SHIFT);
+        XCB_BUTTON_INDEX_1 | XCB_MOD_MASK_SHIFT, XCB_MOD_MASK_ANY);
 
     xcb_grab_button(xcb_connection, 0, xcb_screen->root,
         XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE,
         XCB_GRAB_MODE_ASYNC, XCB_GRAB_MODE_ASYNC, xcb_screen->root, XCB_NONE,
-        XCB_BUTTON_INDEX_3, XCB_MOD_MASK_SHIFT);
+        XCB_BUTTON_INDEX_3 | XCB_MOD_MASK_SHIFT, XCB_MOD_MASK_ANY);*/
 
     flush();
 

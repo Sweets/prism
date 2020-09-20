@@ -19,6 +19,9 @@ void change_window_dimensions(xcb_window_t, unsigned int, unsigned int);
 void change_window_geometry(xcb_window_t, unsigned int, unsigned int,
     unsigned int, unsigned int);
 
+void window_grab_buttons(xcb_window_t, unsigned char, unsigned int);
+void window_release_buttons(xcb_window_t, unsigned char, unsigned int);
+
 void *get_window_property(xcb_window_t, xcb_atom_t, xcb_atom_t);
 xcb_get_window_attributes_reply_t *get_window_attributes(xcb_window_t);
 char *name_of_window(xcb_window_t);
