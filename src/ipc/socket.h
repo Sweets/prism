@@ -7,6 +7,7 @@ typedef enum {
     CONTROLLER
 } ipc_mode_t;
 
+char *socket_path;
 ipc_mode_t ipc_mode;
 
 unsigned short initialize_socket(ipc_mode_t);

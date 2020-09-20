@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/un.h>
@@ -8,13 +9,22 @@
 #include "../util/logging.h"
 
 int socket_file_descriptor;
+char *socket_path;
 ipc_mode_t ipc_mode;
 
 unsigned short initialize_socket(ipc_mode_t mode) {
+    socket_path = calloc(108, sizeof(char));
+    char *display_environment_variable = getenv("DISPLAY");
+    char *username = getenv("USER");
+
     struct sockaddr_un address = {
         .sun_family = AF_UNIX,
-        .sun_path   = "/tmp/prism.socket"
     };
+
+    sprintf(address.sun_path, "/tmp/prism.%s_%s.socket",
+        username, display_environment_variable);
+    strcpy(socket_path, address.sun_path);
+
     struct sockaddr *generic = (struct sockaddr*)&address;
     // Unix socket addr -> generic socket addr
 
@@ -73,5 +83,6 @@ char *read_from_socket(int file_descriptor) {
 void finalize_socket() {
     close(socket_file_descriptor);
     if (ipc_mode == WINDOW_MANAGER_IPC)
-        unlink("/tmp/prism.socket");
+        unlink(socket_path);
+    free(socket_path);
 }
