@@ -8,16 +8,17 @@
 #include "../util/logging.h"
 
 int prism_controller(int argc, char **argv) {
-    if (argc <= 1)
+    if (argc <= 2)
         return EXIT_FAILURE;
 
     if (!initialize_socket(CONTROLLER))
         return EXIT_FAILURE;
 
     // 	private use: U+F0000 - U+FFFFF
-
+    unsigned int index = 2;
     char *buffer = calloc(sizeof(char), 256);
-    for (unsigned int index = 1; index < argc;) {
+
+    for (; index < argc;) {
         if (strlen(buffer) + strlen(argv[index]) > 256)
             break;
 

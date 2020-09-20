@@ -3,7 +3,7 @@
 
 #include "logging.h"
 
-logging_level_t loglevel = DEBUG_LOGGING;
+logging_level_t loglevel = NO_LOGGING;
 
 void _log(logging_level_t level, const char *file, const char *function,
     const int line, char *formatting, ...) {
