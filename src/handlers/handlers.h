@@ -2,6 +2,7 @@
 #import <Cocoa/Cocoa.h>
 
 NSDictionary *application_event_handlers;
+NSDictionary *window_event_handlers;
 
 void initialize_handlers(void);
 
