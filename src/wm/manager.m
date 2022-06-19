@@ -4,6 +4,7 @@
 #import "../../axabl/AXUIElement.h"
 #import "../../axabl/NSWorkspace.h"
 
+#import "../handlers/application.h"
 #import "../handlers/handlers.h"
 
 #import "manager.h"
@@ -19,6 +20,10 @@ int prism() {
 
     /* Allocate and initialize managed object dicts */
     managed_ax_elements = [[NSMutableDictionary alloc] init];
+
+    /* Collect applications running prior to prism */
+    for (NSRunningApplication *application in nsworkspace_running_applications())
+        application_launched(application, [NSNumber numberWithInteger:[application processIdentifier]]);
 
     /* Fire and forget */
     CFRunLoopRun();
