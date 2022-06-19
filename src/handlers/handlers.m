@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+#import "../../axabl/NSWorkspace.h"
+
 #import "application.h"
 #import "handlers.h"
 #import "signal.h"
